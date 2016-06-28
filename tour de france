@@ -1,0 +1,74 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+/**
+ * Created by drei on 27.06.2016.
+ несколько стартов
+ на каждый старт дается количество участников и число участников нужное для старта
+ если меньше нуля/ноль то старт есть иначе нет
+ на вход
+ строка число стартов
+ строка количества и порог
+ строка значений участников
+ 
+ вывод
+ если старт есть то 0 иначе 1
+ это все суммируется и переводится в двоичный вид
+ */
+public class Solutio {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int Sum = 0;
+        int sum1 = 0;
+        int s = Integer.parseInt(reader.readLine());
+        for (int l = 0; l < s; l++) {
+            String str1 = reader.readLine();
+            String str2 = reader.readLine();
+
+            char[] mass_str = str1.toCharArray();
+            int i = 0;
+            int k = 0;
+            int n = 0;
+            String stroka = "";
+            while (mass_str[i] != ' ') {
+                String o = String.valueOf(mass_str[i]);
+                stroka = stroka + o;
+                i++;
+            }
+            n = Integer.parseInt(stroka);
+            i = 0;
+            stroka = "";
+            while (mass_str[i] != ' ') {
+                String o = String.valueOf(mass_str[i]);
+                stroka = stroka + o;
+                i++;
+            }
+            k = Integer.parseInt(stroka);
+
+            String[] parts = str2.split(" ");
+            int[] mass_int = new int[parts.length];
+            for (int j = 0; j <parts.length ; j++) {
+                mass_int[j] = Integer.parseInt(parts[j]);
+            }
+
+            int sum = 0;
+
+            for (int j = 0; j < mass_int.length; j++) {
+                if(mass_int[i]<=0)
+                    sum++;
+            }
+
+            System.out.println(sum);
+            if (sum < k){
+                Sum = 1;
+            }
+            else {
+                Sum = 0;
+            }
+
+            System.out.println(Sum);
+        }
+        System.out.println(sum1);
+    }
+}
