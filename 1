@@ -1,0 +1,925 @@
+import com.sun.deploy.util.ArrayUtil;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
+
+/**
+ * Created by drei on 11.02.2016.
+ */
+public class helloworld {
+    public static void main(String[] args) {
+        List<Integer> arr = new ArrayList<Integer>();
+        Random r = new Random();
+
+        for (int i = 0; i <10 ; i++) {
+            arr.add(r.nextInt(3));
+        }
+
+        for (int i = 0; i <arr.size() ; i++) {
+            System.out.println(arr.get(i));
+        }
+
+        System.out.println(" test ");
+
+        for (int i = 0; i <arr.size() ; i++) {
+            if(arr.get(i)==2){
+                arr.remove(i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < arr.size() ; i++) {
+            System.out.println(arr.get(i));
+        }
+    }
+
+    public static class Ferrari extends LuxuriousCar{
+        public void printlnDesire() {
+            System.out.println(Constants.WANT_STRING+Constants.FERRARY_NAME);
+        }
+    }
+
+    public static class Lanos {
+        public void printlnDesire() {
+            //add your code here
+            System.out.println(Constants.WANT_STRING+Constants.LANOS_NAME);
+        }
+    }
+
+    public static class LuxuriousCar{
+        private void printlnDesire()
+        {
+            System.out.println(Constants.WANT_STRING+ Constants.LUXURIOUS_CAR);
+        }
+    }
+    public static class CheapCar{
+        private void printlnDesire()
+        {
+            System.out.println(Constants.WANT_STRING+Constants.CHEAP_CAR);
+        }
+    }
+
+    public static class Constants {
+        public static String WANT_STRING = "Я хочу ездить на ";
+        public static String LUXURIOUS_CAR = "роскошной машине";
+        public static String CHEAP_CAR = "дешевой машине";
+        public static String FERRARY_NAME = "Феррари";
+        public static String LANOS_NAME = "Ланосе";
+    }
+
+    public static int loneSum(int a, int b, int c) {
+        int sum=0;
+        if((a!=b) && (a!=c))
+            sum+=a;
+        if((b!=a) && (b!=c))
+            sum+=b;
+        if((c!=a) && (c!=b))
+            sum+=c;
+        return sum;
+    }
+
+    public static boolean makeBricks(int small, int big, int goal) {
+        int a,b,c;
+        a=goal;
+        b=big;
+        c=small;
+        while(a!=0){
+            if((b!=0) && (!(a-5<0))){
+                a-=5;
+                b--;
+            }
+            else if ((c!=0) && (!(a-1<0))){
+                a-=1;
+                c--;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static class MovieFactory
+    {
+
+        static Movie getMovie(String key) throws IOException
+        {
+            Movie movie = null;
+            //создание объекта SoapOpera (мыльная опера) для ключа "soapOpera"
+            if ("soapOpera".equals(key))
+            {
+                movie = new SoapOpera();
+            }
+            if ("cartoon".equals(key))
+            {
+                movie = new SoapOpera();
+            }
+            if ("thriller".equals(key))
+            {
+                movie = new SoapOpera();
+            }
+            return movie;
+        }
+    }
+
+    public class Cartoon extends Movie{
+
+    }
+
+    public class Thriller extends Movie{
+
+    }
+
+
+    static abstract class Movie
+    {
+    }
+
+    static class SoapOpera extends Movie
+    {
+    }
+
+
+    public static void doWork(Person person)
+    {
+        if(person instanceof Person.User)
+            ((Person.User) person).live();
+        if(person instanceof Person.Looser)
+            ((Person.Looser) person).doNothing();
+        if(person instanceof Person.Coder)
+            ((Person.Coder) person).coding();
+        if(person instanceof Person.Proger)
+            ((Person.Proger) person).enjoy();
+        // пункт 3
+    }
+
+    static class CatFactory
+    {
+
+        static Cat getCatByKey(String key)
+        {
+            Cat cat = null;
+            if ("vaska".equals(key))
+            {
+                cat = new MaleCat("Василий");
+            } else if ("murka".equals(key))
+            {
+                cat = new FemaleCat("Мурочка");
+            } else if ("kiska".equals(key))
+            {
+                cat = new FemaleCat("Кисюлька");
+            } else
+            {
+                cat = new Cat(key);
+            }
+
+            return cat;
+        }
+    }
+
+    static class Cat
+    {
+        private String name;
+
+        protected Cat(String name)
+        {
+            this.name = name;
+        }
+
+        public String getName()
+        {
+            return this.name;
+        }
+
+        public String toString()
+        {
+            return "Я уличный кот " + getName();
+        }
+    }
+
+    static class MaleCat extends Cat
+    {
+        MaleCat(String name)
+        {
+            super(name);
+        }
+
+        public String toString()
+        {
+            return "Я - солидный кошак по имени " + getName();
+        }
+    }
+
+    static class FemaleCat extends Cat
+    {
+        FemaleCat(String name)
+        {
+            super(name);
+        }
+
+        public String toString()
+        {
+            return "Я - милая кошечка по имени " + getName();
+        }
+    }
+
+    public static abstract class Translator
+    {
+        public abstract String getLanguage();
+
+        public String translate()
+        {
+            return "Я переводчик с " + getLanguage();
+        }
+    }
+
+    public static class EnglishTranslator extends Translator{
+
+        @Override
+        public String getLanguage()
+        {
+            return "английского";
+        }
+    }
+
+
+
+    public static void sort(String[] array)
+    {
+        //напишите тут ваш код
+        for (int i = 0; i <array.length ; i++)
+        {
+            for (int j = 0; j <array.length ; j++)
+            {
+                if(isGreaterThan(array[i], array[j])){
+                    String c = array[i];
+                    array[i] = array[j];
+                    array[j] = c;
+                }
+            }
+        }
+    }
+
+    //Метод для сравнения строк: 'а' больше чем 'b'
+    public static boolean isGreaterThan(String a, String b)
+    {
+        return a.compareTo(b) > 0;
+    }
+
+    public static boolean timee(String s)
+    {
+        Date yearStartTime = new Date();
+        Date date = new Date(s);
+        yearStartTime.setHours(0);
+        yearStartTime.setMinutes(0);
+        yearStartTime.setSeconds(0);
+        yearStartTime.setYear(date.getYear());
+        yearStartTime.setDate(1);      // первое число
+        yearStartTime.setMonth(0);     // месяц январь, нумерация для месяцев 0-11
+
+        long msTimeDistance = date.getTime() - yearStartTime.getTime();
+        System.out.println(msTimeDistance);
+        long msDay = 24 * 60 * 60 * 1000;  //сколько миллисекунд в одних сутках
+        int dayCount = (int) (msTimeDistance/msDay); //количество целых дней
+        if(msTimeDistance<=0){
+            return true;
+        }
+        else if((86399000<=msTimeDistance)&&(msTimeDistance<=86399999)){
+            return false;
+        }
+        else {
+            dayCount+=2;
+            if (dayCount%2!=0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    public static String upper1(String s){
+        char[] mass = s.toCharArray();
+        Character[] massCH = new Character[mass.length];
+        for (int i = 0; i <mass.length ; i++) {
+            massCH[i] = new Character(mass[i]);
+        }
+        String [] ends = new String[massCH.length];
+        for (int i = 0; i <massCH.length ; i++)
+        {
+            if ((i==0) && (massCH[i].toString().equals(" "))){
+                continue;
+            }
+            else if ((i==0) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else if((massCH[i-1].toString().equals(" ")) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else {
+                ends[i] = massCH[i].toString().toLowerCase();
+            }
+        }
+        String end="";
+        for (int i = 0; i <ends.length ; i++) {
+            end = end  + ends[i];
+        }
+        return end;
+        //напишите тут ваш код
+    }
+//JANUARY 1 2000 = true
+//JANUARY 2 2020 = false
+    public static boolean isDateOdd(String date)
+    {
+        Date time = new Date();
+        Date date1 = new Date (date);
+        Date currentTime = new Date();
+        currentTime.setYear(date1.getMonth());
+        int day = date1.getDate();
+        time.setYear(date1.getYear());
+        time.setMonth(date1.getMonth()); //||((date1.getMonth()==1)&&(date1.getDate()==29))
+        if((((date1.getYear()%4==0) && (date1.getYear()%100!=0)) || (date1.getYear()%400==0)) && ((date1.getMonth()>1))){
+            day++;
+            System.out.println("+");
+        }
+        switch (date1.getMonth()){
+            case(0):{
+                break;
+            }
+            case(1):{
+                day=31+day;
+                break;
+            }
+            case(2):{
+                day=31+28+day;
+                break;
+            }
+            case(3):{
+                day=31+28+31+day;
+                break;
+            }
+            case(4):{
+                day=31+28+31+30+day;
+                break;
+            }
+            case(5):{
+                day=31+28+31+30+31+day;
+                break;
+            }
+            case(6):{
+                day=31+28+31+30+31+30+day;
+                break;
+            }
+            case(7):{
+                day=31+28+31+30+31+30+31+day;
+                break;
+            }
+            case(8):{
+                day=31+28+31+30+31+30+31+31+day;
+                break;
+            }
+            case(9):{
+                day=31+28+31+30+31+30+31+31+30+day;
+                break;
+            }
+            case(10):{
+                day=31+28+31+30+31+30+31+31+30+31+day;
+                break;
+            }
+            case(11):{
+                day=31+28+31+30+31+30+31+31+30+31+30+day;
+                break;
+            }
+        }
+        if ((day%2!=0)){
+            return true;
+        }
+        else if(day==0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static String up(String s){
+        char[] mass = s.toCharArray();
+        Character[] massCH = new Character[mass.length];
+        for (int i = 0; i <mass.length ; i++) {
+            massCH[i] = new Character(mass[i]);
+        }
+        String [] ends = new String[massCH.length];
+        String end="";
+        for (int i = 0; i <ends.length ; i++) {
+            ends[i] = massCH[i].toString().toUpperCase();
+        }
+        for (int i = 0; i <ends.length ; i++) {
+            end+=ends[i];
+        }
+        return end;
+        //напишите тут ваш код
+    }
+    public static String upper(String s){
+        char[] mass = s.toCharArray();
+        Character[] massCH = new Character[mass.length];
+        for (int i = 0; i <mass.length ; i++) {
+            massCH[i] = new Character(mass[i]);
+        }
+        String [] ends = new String[massCH.length];
+        for (int i = 0; i <massCH.length ; i++)
+        {
+            if ((i==0) && (massCH[i].toString().equals(" "))){
+                continue;
+            }
+            else if ((i==0) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else if((massCH[i-1].toString().equals(" ")) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else {
+                ends[i] = massCH[i].toString();
+            }
+        }
+        String end="";
+        for (int i = 0; i <ends.length ; i++) {
+            end = end  + ends[i];
+        }
+        return end;
+        //напишите тут ваш код
+    }
+
+    public static void toUpperAllPhrase() throws Exception{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String s = reader.readLine();
+        char[] mass = s.toCharArray();
+        Character[] massCH = new Character[mass.length];
+        for (int i = 0; i <mass.length ; i++) {
+            massCH[i] = new Character(mass[i]);
+        }
+        String [] ends = new String[massCH.length];
+        for (int i = 0; i <massCH.length ; i++)
+        {
+            if ((i==0) && (massCH[i].toString().equals(" "))){ //проверка на равенство первого элемента пробелу иначе будет выход за массив
+                ends[i] = massCH[i].toString().toUpperCase();;
+            }
+            else if ((i==0) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else if((massCH[i-1].toString().equals(" ")) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else if((massCH[i-1].toString().equals(",")) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else if((massCH[i-1].toString().equals(".")) && !(massCH[i].toString().equals(" "))){
+                ends[i] = massCH[i].toString().toUpperCase();
+            }
+            else {
+                ends[i] = massCH[i].toString();
+            }
+        }
+        String end="";
+        for (int i = 0; i <ends.length ; i++) {
+            end = end  + ends[i];
+        }
+        System.out.println(end);
+    }
+
+    public static void removeTheFirstNameDuplicates(HashMap<String, String> map)
+    {
+        //напишите тут ваш код
+        int count=0;
+        for (String values : map.values())
+        {
+            for (String value: map.values())
+            {
+                if(value.equals(values)){
+                    count++;
+                }
+            }
+            if(count!=0){
+                removeItemFromMapByValue(map, values);
+            }
+        }
+
+    }
+
+    public static void removeItemFromMapByValue(HashMap<String, String> map, String value)
+    {
+        HashMap<String, String> copy = new HashMap<String, String>(map);
+        for (Map.Entry<String, String> pair: copy.entrySet())
+        {
+            if (pair.getValue().equals(value))
+                map.remove(pair.getKey());
+        }
+    }
+
+    public static HashMap<String, String> createMap()
+    {
+        HashMap<String, String> sername_names = new HashMap<String, String>();
+        sername_names.put("Griffin", "Djustin");
+        sername_names.put("Dior", "Peter");
+        sername_names.put("Dwayn", "Djon");
+        sername_names.put("Sarkisyan", "Lois");
+        sername_names.put("Jackson", "Mikl");
+        sername_names.put("Dimond", "Lessy");
+        sername_names.put("Putin", "Vladimir");
+        sername_names.put("Poroshenko", "Petr");
+        sername_names.put("Girinivskii", "Vladimir");
+        sername_names.put("Balbesovi4", "Balbes");
+        return sername_names;
+
+    }
+
+    public static int getCountTheSameFirstName(HashMap<String, String> map, String name)
+    {
+        int count=0;
+        for (Map.Entry<String, String> pair : map.entrySet())
+        {
+            String key = pair.getKey();
+            if(key.equals(name)){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    public static int getCountTheSameLastName(HashMap<String, String> map, String lastName)
+    {
+        int count=0;
+        for (Map.Entry<String,String> pair: map.entrySet() ){
+            String value = pair.getValue();
+            if (value.equals(lastName)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static HashSet<Integer> createSet()
+    {
+        HashSet<Integer> mass = new HashSet<Integer>();
+        mass.add(10);
+        mass.add(120);
+        mass.add(1120);
+        mass.add(1430);
+        mass.add(150);
+        mass.add(1640);
+        mass.add(130);
+        mass.add(710);
+        mass.add(1650);
+        mass.add(104);
+        mass.add(1023);
+        mass.add(121320);
+        mass.add(11123420);
+        mass.add(143230);
+        mass.add(152430);
+        mass.add(1632440);
+        mass.add(13650);
+        mass.add(71430);
+        mass.add(164350);
+        mass.add(104234);
+        removeAllNumbersMoreThan10(mass);
+        return mass;
+
+    }
+
+    public static HashSet<Integer> removeAllNumbersMoreThan10(HashSet<Integer> set)
+    {
+        //напишите тут ваш код
+        for (Integer text: set)
+        {
+            if (text>10){
+                set.remove(text);
+            }
+        }
+        return set;
+    }
+
+    public static void sort(int[] array)
+    {
+        for (int i = 0; i < array.length ; i++)
+        {
+            for (int j = 0; j < array.length ; j++)
+            {
+                if(array[i]>array[j]){
+                    int c;
+                    c= array[i];
+                    array[i]=array[j];
+                    array[j]=c;
+                }
+            }
+        }
+    }
+
+    public final static int A = 5;
+    public final static int B = 2;
+    public final static int C = A*B;
+
+    public int getValue()
+    {
+        return C;
+    }
+
+    public static class Human
+    {
+        String name;
+        boolean sex;
+        int age;
+        Human father;
+        Human mother;
+        //напишите тут ваш код
+        public Human(String name, boolean sex, int age, Human father, Human mother){
+            this.name=name;
+            this.sex=sex;
+            this.age=age;
+            this.father=father;
+            this.mother=mother;
+        }
+
+        public String toString()
+        {
+            String text = "";
+            text += "Имя: " + this.name;
+            text += ", пол: " + (this.sex ? "мужской" : "женский");
+            text += ", возраст: " + this.age;
+
+            if (this.father != null)
+                text += ", отец: " + this.father.name;
+
+            if (this.mother != null)
+                text += ", мать: " + this.mother.name;
+
+            return text;
+        }
+    }
+
+    public static void stopwatch() throws Exception
+    {
+        for (int i=30;i>=0;i--)
+        {
+            System.out.println(i);
+            Thread.sleep(100);
+        }
+
+        System.out.println("Бум!");
+    }
+
+    public static void reader_array() throws Exception{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<String> mass = new ArrayList<String>();
+        mass.add(reader.readLine());
+        while(!(mass.get(mass.size()-1).equals("end"))){
+            mass.add(reader.readLine());
+        }
+        mass.remove(mass.size()-1);
+        for (int i = 0; i <mass.size() ; i++)
+        {
+            System.out.println(mass.get(i));
+        }
+    }
+
+    public static int max(ArrayList<Integer> list){
+        int max = list.get(0);
+        for (int i = 0; i <list.size() ; i++)
+        {
+            if(max<list.get(i)){
+                max=list.get(i);
+            }
+        }
+        return max;
+    }
+
+    public static int min(ArrayList<Integer> list){
+        int min = list.get(0);
+        for (int i = 0; i <list.size() ; i++)
+        {
+            if(min>list.get(i)){
+                min=list.get(i);
+            }
+        }
+        return min;
+    }
+
+    public static ArrayList<String> doubleValues(ArrayList<String> list)
+    {
+        //напишите тут ваш код
+        for (int i = 0; i <list.size(); i++)
+        {
+            list.add(i,list.get(i));
+            i++;
+        }
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println(list.get(i));
+        }
+        return list;
+    }
+
+    public static int[] initializeArray() throws IOException {
+        //Инициализируйте (создайте и заполните) массив тут
+        int[] mass= new int[20];
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        for (int i = 0; i <mass.length ; i++)
+        {
+            mass[i]= Integer.parseInt(reader.readLine());
+        }
+        return null;
+    }
+
+    public static int max(int[] array) {
+        //Найдите максимальное значение в этом методе
+        System.out.println(array[0]);
+        int max = -10000;
+        for (int i = 0; i <array.length ; i++)
+        {
+            if(array[i]>max){
+                max=array[i];
+            }
+        }
+        return max;
+    }
+
+    public static void chi5() throws Exception{
+        BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
+        int [] a = new int [5];
+        int c=0;
+        for (int i = 0; i <5 ; i++)
+        {
+            a[i]=Integer.parseInt(reader.readLine());
+        }
+        for (int i = 0; i < 5 ; i++)
+        {
+            for(int j=0; j<5; j++){
+                if (a[i]<a[j]){
+                    c=a[i];
+                    a[i]=a[j];
+                    a[j]=c;
+                }
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            System.out.println(a[i]);
+        }
+    }
+
+    public static int po(int[] mass, int ind)
+    {
+        int l = 0;
+        int r = mass.length;
+
+        while (true)
+        {
+            int m = l + (r - l) / 2;
+
+            if (mass[m] == ind)
+                return m;
+
+            if (mass[m] > ind)
+                r = m;
+            else
+                l = m + 1;
+        }
+    }
+
+    public static void massivi(){
+        int[] mass = new int[10];
+        //int[] mass1 = {1, 3, 5, 6, 7  };
+        int sum=0;
+        //for (int i = 0; i < mass1.length; i++) {
+        //  sum=sum+mass1[i];
+        // }
+        //System.out.println(sum/mass1.length);
+        int [][] twoo = new int [10][10];
+        int [][][] three = new int [11][10][9];
+        Random random = new Random();
+        int a;
+        /*for (int i = 0; i <three.length ; i++) {
+            for(int j=0; j<three[i].length; j++){
+                for(int k=0;k<three[i][j].length; k++){
+                    a = three[i][j][k]=random.nextInt(100);
+                    System.out.print(a + " ");
+                }
+                System.out.println("");
+            }
+            System.out.println("");
+
+        }*/
+        int j=0;
+        /*for (int i:mass) {
+            j++;
+            i=j;
+            i=i*i;
+            //System.out.print(i+" ");
+        }*/
+        int [][] mass2 = new int[10][10];
+        int max=-10;
+        for (int i = 0; i <mass2.length ; i++) {
+            for (j = 0; j<mass2[i].length; j++) {
+                mass2[i][j]=random.nextInt(100);
+                if (mass2[i][j]>max) {
+                    mass[i]=mass2[i][j];
+                }
+            }
+            max=-10;
+        }
+        sum=0;
+        for (int i = 0; i <mass.length; i++) {
+            System.out.println(mass[i]);
+            sum=sum+mass[i];
+        }
+        int sum1=0;
+        System.out.println(sum/mass.length);
+        for (int i = 0; i <mass.length ; i++) {
+            sum1=sum1+(mass[i]-sum/mass.length)*(mass[i]-sum/mass.length    );
+        }
+        double h;
+        System.out.println();
+        h=Math.sqrt(1./mass.length*sum1);
+        System.out.println(1./mass.length);
+        System.out.println(h);
+    }
+
+    public static void bin() throws Exception{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String s= reader.readLine();
+        int a = Integer.parseInt(s);
+        System.out.println(Integer.toBinaryString(a));
+        System.out.println(Integer.bitCount(a));
+    }
+    public static void dv(){
+        long a=2;
+        for(int i=1; i<=10; i++){
+            System.out.println(Math.pow(a,a));
+            a++;
+        }
+    }
+    public static void fb(){
+        int a=0;
+        int b=1;
+        int c;
+        while (a<1000) {
+            c=b;
+            b=a+b;
+            a=c;
+        }
+    }
+    public static void chisla(int a){
+        String st;
+        switch(a){
+            case 1:
+                st="One";
+                System.out.println(st);
+                break;
+            case 2:
+                st="Two";
+                System.out.println(st);
+                break;
+            case 3:
+                st="Three";
+                System.out.println(st);
+                break;
+        }
+    }
+    public static double pi(){
+        double k=3;
+        double i=4;
+        double h=0;
+        int s=1;
+        do {
+            if (s%2==0){
+                h=i+4/k;
+            }
+            else {
+                h=i-4/k;
+            }
+            s++;
+            i=h;
+            k=k+2;
+            System.out.println(s);
+            System.out.println(i);
+            System.out.println(k);
+            System.out.println(i-i/k);
+
+        }
+        while (i-i/k>0.00001);
+        return 0;
+
+    }
+    public static void sqr(double a, double b, double c){
+        double s;
+        if (b*b-4*a*c<0){
+            System.out.println("Non");
+        }
+        else {
+            s = ((-1) * b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+            System.out.println(s);
+            a = ((-1) * b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+            System.out.println(a);
+        }
+
+    }
+}
